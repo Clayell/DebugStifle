@@ -63,11 +63,11 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
    <PropertyGroup>
 	  <PostBuildEvent>
-		  xcopy /y /i "$(TargetPath)" "$(SolutionDir)\GameData\DebugStifle\"
-		  xcopy /y /i "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)\GameData\DebugStifle\"
+		  xcopy /y /i "$(TargetPath)" "$(SolutionDir)\GameData\DebugStifle\Plugins\"
+		  xcopy /y /i "$(TargetDir)$(TargetName).pdb" "$(SolutionDir)\GameData\DebugStifle\Plugins\"
 
-		  xcopy /y /i "$(TargetPath)" "$(KSPRoot)\GameData\DebugStifle\"
-		  xcopy /y /i "$(TargetDir)$(TargetName).pdb" "$(KSPRoot)\GameData\DebugStifle\"
+		  xcopy /y /i "$(TargetPath)" "$(KSPRoot)\GameData\DebugStifle\Plugins\"
+		  xcopy /y /i "$(TargetDir)$(TargetName).pdb" "$(KSPRoot)\GameData\DebugStifle\Plugins\"
 	  </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
