@@ -17,7 +17,9 @@ namespace DebugStifle
 
 		private bool open;
 
-		private void Awake()
+		private void Log(string message) => Debug.Log("[Debug_Stifler] " + message);
+
+        private void Awake()
 		{
 			if (loaded)
 			{
@@ -50,7 +52,7 @@ namespace DebugStifle
 			while (GameObject.FindObjectOfType<DebugScreen>() == null && timer < 20)
 			{
 				timer++;
-				Debug.Log("[Debug_Stifler] Searching For Debug Panel...");
+				Log("Searching For Debug Panel...");
 				yield return new WaitForSeconds(1);
 			}
 
@@ -61,7 +63,7 @@ namespace DebugStifle
 
 		private void AlterPrefab()
 		{
-			Debug.Log("[Debug_Stifler] Altering Debug Panel...");
+			Log("Altering Debug Panel...");
 
 			DebugScreen screen = GameObject.FindObjectOfType<DebugScreen>();
 
@@ -99,7 +101,7 @@ namespace DebugStifle
 
 			processed = true;
 
-			Debug.Log("[Debug_Stifler] Debug Panel Altered");
+			Log("Debug Panel Altered");
 
 			Destroy(gameObject);		
 		}
