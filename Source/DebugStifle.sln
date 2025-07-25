@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DebugStifle", "DebugStifle.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GameData", "GameData", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DebugStifle", "DebugStifle", "{96E9EB56-D4C7-4B8A-AE49-24BCC2E74540}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DebugStifle", "DebugStifle", "{5CA262E0-4145-4B0C-82A5-0FB91E3F05B4}"
 	ProjectSection(SolutionItems) = preProject
 		..\LICENSE = ..\LICENSE
 		..\README.md = ..\README.md
@@ -28,7 +28,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{96E9EB56-D4C7-4B8A-AE49-24BCC2E74540} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5CA262E0-4145-4B0C-82A5-0FB91E3F05B4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4B98152A-4485-4F49-BADB-CD5DB7268B1C}
