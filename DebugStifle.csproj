@@ -58,15 +58,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="GameData\DebugStifle\LICENSE.md" />
+    <None Include="GameData\DebugStifle\PluginData\settings.cfg" />
     <None Include="GameData\DebugStifle\README.md" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GameData\DebugStifle\Plugins\DebugStifle.dll" />
     <Content Include="GameData\DebugStifle\Plugins\DebugStifle.pdb" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameData\DebugStifle\PluginData\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
