@@ -1,9 +1,12 @@
 ﻿
+using KSP.UI.Screens.DebugToolbar;
 using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using KSP.UI.Screens.DebugToolbar;
-using TMPro;
 
 namespace DebugStifle
 {
@@ -16,8 +19,58 @@ namespace DebugStifle
 		private static DebugScreenConsole console;
 
 		private bool open;
+        private static bool enableInput = false;
+        readonly static string SettingsPath = Path.Combine(KSPUtil.ApplicationRootPath, "GameData/DebugStifle/PluginData/settings.cfg");
 
-		private void Log(string message) => Debug.Log("[Debug_Stifler] " + message);
+        private void Log(string message) => Debug.Log("[Debug_Stifler] " + message);
+
+        internal static void TryReadValue<T>(ref T target, ConfigNode node, string name)
+        {
+            if (node.HasValue(name))
+            {
+                try
+                {
+                    target = (T)TypeDescriptor.GetConverter(typeof(T)).ConvertFromString(node.GetValue(name));
+                }
+                catch
+                {
+                    // just skip over it
+                }
+            }
+            // skip again
+        }
+
+        private static void SaveSettings()
+        {
+			ConfigNode settings = new ConfigNode("SETTINGS");
+
+            Dictionary<string, object> settingValues = new Dictionary<string, object>
+            {
+                { "enableInput", enableInput },
+            };
+
+            foreach (KeyValuePair<string, object> kvp in settingValues) settings.AddValue(kvp.Key, kvp.Value);
+
+            ConfigNode root = new ConfigNode();
+            root.AddNode(settings);
+
+            root.Save(SettingsPath); // this makes a new file if settings.cfg didnt exist already
+        }
+
+        private static void LoadSettings()
+        {
+            ConfigNode root = ConfigNode.Load(SettingsPath);
+            if (root != null)
+            {
+                ConfigNode settings = root.GetNode("SETTINGS");
+                if (settings != null)
+                {
+                    void Read<T>(ref T field, string name) => TryReadValue(ref field, settings, name);
+
+                    Read(ref enableInput, "enableInput");
+                }
+            }
+        }
 
         private void Awake()
 		{
@@ -30,7 +83,9 @@ namespace DebugStifle
 			loaded = true;
 
 			DontDestroyOnLoad(gameObject);
-		}
+
+            LoadSettings();
+        }
 
 		private void Update()
 		{
@@ -45,7 +100,7 @@ namespace DebugStifle
 			}
 		}
 
-		private IEnumerator WaitForDebug()
+        private IEnumerator WaitForDebug()
 		{
 			int timer = 0;
 
@@ -75,7 +130,12 @@ namespace DebugStifle
 			if (console == null)
 				return;
 
-			Button toggle = GameObject.Instantiate<Button>(console.submitButton);
+            if (console.inputField != null)
+            {
+                console.inputField.interactable = enableInput;
+            }
+
+            Button toggle = GameObject.Instantiate<Button>(console.submitButton);
 
 			toggle.transform.SetParent(console.submitButton.transform.parent, false);
 
@@ -103,18 +163,26 @@ namespace DebugStifle
 
 			Log("Debug Panel Altered");
 
-			Destroy(gameObject);		
+            Destroy(gameObject);		
 		}
 
 		private static void ToggleInput()
 		{
-			if (console.inputField.interactable)
+            if (console?.inputField == null) return;
+
+            if (console.inputField.interactable)
 			{
 				console.inputField.DeactivateInputField();
 				console.inputField.interactable = false;
+				enableInput = false;
 			}
 			else
-				console.inputField.interactable = true;
-		}
+			{
+                console.inputField.interactable = true;
+                enableInput = true;
+            }
+
+            SaveSettings(); // we have to do this here because every thing else gets destroyed the first time
+        }
     }
 }
