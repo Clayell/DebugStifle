@@ -1,7 +1,7 @@
 # DebugStifle
 A KSP addon to allow for stifling the text input field of the debug console.
 
-[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Clayell/DebugStifle/total)](https://github.com/Clayell/DebugStifle/releases)
+[![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/Clayell/DebugStifle/total)](https://github.com/Clayell/DebugStifle/releases/latest)
 
 Sometimes the Debug Console's input field just randomly starts stealing your key commands, so this mod adds a toggle to turn off the input field.
 
